@@ -2,36 +2,41 @@ import java.io.*;
 import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
-        Kattio s = new Kattio("triangles");
-        int n = s.nextInt();
-        long [] x = new long[n];
-        long [] y = new long[n];
-
-        for (int i = 0; i < n ; i++)
+        Kattio s = new Kattio();
+        int t = s.nextInt();
+        while (t-- > 0)
         {
-            x[i] = s.nextInt() + 10000;
-            y[i] = s.nextLong() + 10000;
-        }
-        double area = 0;
-        for (int i = 0 ; i < n; i++)
-        {
-            for (int k =  0; k  < n ; k++)
+            int n = s.nextInt();
+            long[] arr = new long[n];
+            int two = 0;
+            for (int i = 0 ; i < n; i++)
             {
-                for (int j = 0; j < n; j ++)
+                arr[i] = s.nextInt();
+                if (arr[i] == 2)
+                    two++;
+            }
+            int count = 0;
+            if (two == 0)
+                s.println(1);
+            else if (two % 2 == 0)
+            {
+                for (int i = 0 ;i < n ; i++)
                 {
-                    if (y[i] == y[k] && (x[i] == x[j]))
+                    if (arr[i] == 2)
+                        count++;
+                    if (count == two / 2)
                     {
-                        area = Double.max(area, ( (x[k] - x[i])  * (y[j]  - y[i])));
+                        s.println(i + 1);
+                        break;
                     }
                 }
             }
+            else {
+                s.println(-1);
+            }
         }
-        s.println((long) area);
-        s.flush();
         s.close();
     }
-
-
 
 
     static class Kattio extends PrintWriter {
@@ -43,6 +48,10 @@ public class Main {
         public Kattio() {
             this(System.in, System.out);
         }
+//        public Kattio() throws IOException {
+//            super("/home/m7md-a4raf/IdeaProjects/Main/src/output.txt");
+//            r = new BufferedReader(new FileReader("/home/m7md-a4raf/IdeaProjects/Main/src/input.txt"));
+//        }
 
         public Kattio(InputStream i, OutputStream o) {
             super(o);
@@ -80,3 +89,5 @@ public class Main {
         }
     }
 }
+
+
